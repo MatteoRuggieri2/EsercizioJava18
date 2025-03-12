@@ -18,10 +18,19 @@ public class ReadAndSort {
 	
 	private String[] sortedFileWords; // Contiene le parole univoche e ordinate in base alla richiesta
 
+	private String wordsString; // Contiene la stringa con le parole univoche e ordinate
+	
 	
 	
 	ReadAndSort() {
-		extractsStrings(this.filePath);
+		this.wordsString = extractsStrings(this.filePath);
+		System.out.println(this.wordsString);
+	}
+	
+	
+	
+	public String getWordsString() {
+		return this.wordsString;
 	}
 	
 	

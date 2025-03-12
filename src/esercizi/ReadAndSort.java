@@ -8,6 +8,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import enums.EnumSortType;
+
 /* READ AND SORT
  * Crea la classe ReadAndSort
  * 1 - Leggere un file di testo con parole separate da 1 o più spazi (parola1 parola2  parol...)
@@ -17,49 +19,28 @@ import java.util.TreeSet;
 
 public class ReadAndSort {
 	
-	private String pathFileName = "src/text_files/word-list.txt";
+	private String fileName = "src/text_files/word-list.txt";
 	
-	private String fileContent;
+	private String fileContent; // Contiene il contenuto del file in una stringa
 	
-	private Set<String> paroleUnicheInOrdineAlfabetico;
+	private String[] fileWords;
 	
-	private String[] splittedText;
-	
-	private String[] revertedWords;
+	private String[] sortedFileWords; // Contiene le parole univoche e ordinate in base alla richiesta
 
-	public static void main(String[] args) {
-		ReadAndSort readAndSort = new ReadAndSort();
-		readAndSort.run();
-		
-	}
 	
-	private void run() {
+	/* Questo metodo è quello principale, ha come compito quello
+	 * di richiamare tutti gli altri metodi della classe che lavorano
+	 * per rendere le parole del file, univoche, e ordinate (all'inverso - DESC). */
+	private void extractsStrings(String filePath) {
 		
-		/* Esiste un costruttore di TreeSet che accetta come paramtro un Comparator (che è un interfaccia)
-		 * dove io vado ad implementare un metodo compare, in modo che quando il mio treeSet dovrà mettere
-		 * in ordine gli elementi, richiamerà il metodo che io ho scritto (che ha sovrascritto il suo).
-		 * In questo caso c'è prima s2 e poi s1 in modo che li mette in ordine contrario.
-		 * 
-		 * Nello specifico ecco come il comparator gestisce il suo ordinamento:
-		 * ritorna un int -1 se deve spostare l'elemento indietro, 0 se deve rimanere al suo posto, 
-		 * 1 se deve spostarlo avanti. */
-		paroleUnicheInOrdineAlfabetico = new TreeSet<String>(
-			// Classe anonima
-			new Comparator<String>() {
-				public int compare(String s1, String s2) {
-					return s2.compareTo(s1);   // s1, s2 ordine alfabetico | s2, s1 ordine alf invertito
-				}
-			}
-		);
+		// Prendo il contenuto del file
+		this.fileContent = readFile(filePath);
 		
-	
-		// Funzione che apre il file e restituisce il contenuto
-		this.fileContent = readFile(this.pathFileName);
+		// Prendo le parole del file. le separo e le rendo univoche
+		this.fileWords = this.fileContent.split(" +");
 		
-		// Splitto la stringa, elimino i doppioni e metto le parole in ordine ALFABETICO INVERTITO (ho sovrascritto l'ordinamento di default del TreeSet)
-		splittaStringaEMettileInOrdineAlfabetico(fileContent);
-		System.out.println("Parole in ordine: " + this.paroleUnicheInOrdineAlfabetico);
-
+		// Le ordino e le rendo univoche (grazie al TreeSet)
+		
 	}
 	
 	// Questa funzione prende il path del file, apre il file e ritorna una stringa con il contenuto
@@ -85,25 +66,7 @@ public class ReadAndSort {
 		return fileContentString;
 	}
 
-	// Questa funzione splitta la stringa il separatore passati come argomenti
-	private String[] splitString(String string, String separator) {
-		return string.split(separator);
-	}
 	
-	/* Questa funzione prende una stringa, la splitta e poi mette le parole dentro
-	 * un treeSet, quindi toglie i duplicati e le mette in ordine alfabetico */
-	private void splittaStringaEMettileInOrdineAlfabetico(String text) {
-		
-		
-		// Splitto il testo
-		this.splittedText = this.splitString(text, " +");
-		
-		// Inserisco le parole nel treeset (in automatico le ordina in ordine alfabetico)
-		for (String word : this.splittedText) {
-			this.paroleUnicheInOrdineAlfabetico.add(word.toLowerCase());
-		}
-
-	}
 
 }
 

@@ -7,12 +7,6 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-/* READ AND SORT
- * Crea la classe ReadAndSort
- * 1 - Leggere un file di testo con parole separate da 1 o più spazi (parola1 parola2  parol...)
- * 2 - Restituire una stringa con le parole senza duplicati in ordine ALFABETICO INVERSO */
-
-
 
 public class ReadAndSort {
 	
@@ -20,7 +14,7 @@ public class ReadAndSort {
 	
 	private String fileContent; // Contiene il contenuto del file in una stringa
 	
-	private String[] fileWords;
+	private String[] fileWords; // Contiene tutte le parole presenti nel file
 	
 	private String[] sortedFileWords; // Contiene le parole univoche e ordinate in base alla richiesta
 
@@ -114,26 +108,6 @@ public class ReadAndSort {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

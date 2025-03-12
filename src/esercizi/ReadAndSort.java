@@ -26,6 +26,12 @@ public class ReadAndSort {
 
 	
 	
+	ReadAndSort() {
+		extractsStrings(this.filePath);
+	}
+	
+	
+	
 	/* Questo metodo è quello principale, ha come compito quello
 	 * di richiamare tutti gli altri metodi della classe che lavorano
 	 * per rendere le parole del file, univoche, e ordinate (all'inverso - DESC). */

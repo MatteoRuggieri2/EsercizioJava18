@@ -80,7 +80,7 @@ public class ReadAndSort {
 	
 	/* Questo metodo ordina le parole in modo inverso e
 	le rende univoche (proprietà del TreeSet) */
-	public void sort() {
+	private void sort() {
 		
 		/* Esiste un costruttore di TreeSet che accetta come paramtro un Comparator
 		 * (che è un interfaccia) dove io vado ad implementare un metodo compare,

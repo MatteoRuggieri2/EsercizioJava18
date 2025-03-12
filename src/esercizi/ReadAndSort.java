@@ -2,13 +2,10 @@ package esercizi;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-
-import enums.EnumSortType;
 
 /* READ AND SORT
  * Crea la classe ReadAndSort
@@ -19,7 +16,7 @@ import enums.EnumSortType;
 
 public class ReadAndSort {
 	
-	private String fileName = "src/text_files/word-list.txt";
+	private String filePath = "src/text_files/word-list.txt";
 	
 	private String fileContent; // Contiene il contenuto del file in una stringa
 	
@@ -27,6 +24,7 @@ public class ReadAndSort {
 	
 	private String[] sortedFileWords; // Contiene le parole univoche e ordinate in base alla richiesta
 
+	
 	
 	/* Questo metodo è quello principale, ha come compito quello
 	 * di richiamare tutti gli altri metodi della classe che lavorano
@@ -40,8 +38,9 @@ public class ReadAndSort {
 		this.fileWords = this.fileContent.split(" +");
 		
 		// Le ordino e le rendo univoche (grazie al TreeSet)
-		
+		sort();
 	}
+	
 	
 	// Questa funzione prende il path del file, apre il file e ritorna una stringa con il contenuto
 	private String readFile(String path) {
@@ -67,6 +66,31 @@ public class ReadAndSort {
 	}
 
 	
+	/* Questo metodo ordina le parole in modo inverso e
+	le rende univoche (proprietà del TreeSet) */
+	public void sort() {
+		
+		/* Esiste un costruttore di TreeSet che accetta come paramtro un Comparator
+		 * (che è un interfaccia) dove io vado ad implementare un metodo compare,
+		 * in modo che quando il mio treeSet dovrà mettere in ordine gli elementi,
+		 * richiamerà il metodo che io ho scritto (che ha sovrascritto il suo).
+		 * In questo caso c'è prima s2 e poi s1 in modo che li mette in ordine DESC. */
+		Set<String> result = new TreeSet<String>(
+			// Classe anonima
+			new Comparator<String>() {
+				public int compare(String s1, String s2) {
+					// s1, s2 ordine alfabetico | s2, s1 ordine alf invertito
+					return s2.compareTo(s1);
+				}
+			}
+		);
+		
+		for (String word : this.fileWords) {
+			result.add(word.toLowerCase());
+		}
+		
+		this.sortedFileWords = result.toArray(new String[0]);
+	}
 
 }
 

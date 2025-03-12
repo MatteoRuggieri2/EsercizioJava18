@@ -29,7 +29,7 @@ public class ReadAndSort {
 	/* Questo metodo è quello principale, ha come compito quello
 	 * di richiamare tutti gli altri metodi della classe che lavorano
 	 * per rendere le parole del file, univoche, e ordinate (all'inverso - DESC). */
-	private void extractsStrings(String filePath) {
+	private String extractsStrings(String filePath) {
 		
 		// Prendo il contenuto del file
 		this.fileContent = readFile(filePath);
@@ -39,6 +39,9 @@ public class ReadAndSort {
 		
 		// Le ordino e le rendo univoche (grazie al TreeSet)
 		sort();
+		
+		// Ritorno la stringa con le parole univoche ordinate
+		return makeString(this.sortedFileWords);
 	}
 	
 	
@@ -90,6 +93,18 @@ public class ReadAndSort {
 		}
 		
 		this.sortedFileWords = result.toArray(new String[0]);
+	}
+	
+	/* Questo metodo, dato un array di parole, forma la
+	stringa con virgole e punto alla fine utilizzando
+	la classe ottimizzata StringBuilder di Java. */
+	private String makeString(String[] words) {
+		StringBuilder sb = new StringBuilder();
+		
+		for (String word : words) {
+			sb.append(word.toUpperCase() + ", ");
+		}
+		return sb.substring(0, sb.length() - 2) + ".";
 	}
 
 }
